@@ -1,0 +1,74 @@
+# Visual Studio Files and Directories
+*.VC.db
+*.VC.opendb
+*.opensdf
+*.sdf
+*.ncb
+*.suo
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*.filters
+*.sln.docstates
+
+# Build Outputs (Debug, Release, etc.)
+Debug/
+Release/
+x64/
+ipch/
+
+# Object Files and Libraries
+*.obj
+*.o
+*.lib
+*.dll
+*.exp
+*.ilk
+*.pdb
+*.idb
+*.log
+*.tlog
+
+# Generated Files
+Generated Files/
+*.moc
+moc_*
+qrc_*
+ui_*
+
+# Test Results
+*.trx
+*.coverage
+
+# Local Settings
+.vs/
+
+# Other Temporary Files
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+
+# Third-Party Libraries (Adjust paths as needed)
+lib/
+dependencies/
+
+# Precompiled Headers (If you use them)
+*.pch
+*.gch
