@@ -1,54 +1,69 @@
 #include <winsock2.h>
-#include <ws2tcpip.h> // Needed for InetNtop
+#include <ws2tcpip.h> // For InetNtop
 #include <iphlpapi.h>
 #include <stdio.h>
-#pragma comment(lib, "iphlpapi.lib")
+#include <iostream>
+
+#pragma comment(lib, "IPHLPAPI.lib")
 #pragma comment(lib, "ws2_32.lib")
 
 int main() {
+    // Initialize Winsock
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-        fprintf(stderr, "WSAStartup failed.\n");
+        std::cerr << "WSAStartup failed!" << std::endl;
         return 1;
     }
 
-    ULONG outBufLen = 0;
-    GetIpAddrTable(NULL, &outBufLen, FALSE);
-    PMIB_IPADDRTABLE pIpAddrTable = (PMIB_IPADDRTABLE)malloc(outBufLen);
-    if (GetIpAddrTable(pIpAddrTable, &outBufLen, FALSE) != NO_ERROR) {
-        fprintf(stderr, "GetIpAddrTable failed.\n");
-        free(pIpAddrTable);
-        WSACleanup();
-        return 1;
+    // Get adapter information
+    ULONG ulOutBufLen = sizeof(IP_ADAPTER_INFO);
+    PIP_ADAPTER_INFO pAdapterInfo = (IP_ADAPTER_INFO*)malloc(ulOutBufLen);
+    if (GetAdaptersInfo(pAdapterInfo, &ulOutBufLen) == ERROR_BUFFER_OVERFLOW) {
+        free(pAdapterInfo);
+        pAdapterInfo = (IP_ADAPTER_INFO*)malloc(ulOutBufLen);
     }
 
-    if (pIpAddrTable == nullptr) {
-        return 1;
-    }
+    if (GetAdaptersInfo(pAdapterInfo, &ulOutBufLen) == NO_ERROR) {
+        PIP_ADAPTER_INFO pAdapter = pAdapterInfo;
+        while (pAdapter) {
+            std::cout << "Adapter Name: " << pAdapter->AdapterName << std::endl;
+            std::cout << "IP Address: " << pAdapter->IpAddressList.IpAddress.String << std::endl;
+            std::cout << std::endl;
 
-    for (DWORD i = 0; i < pIpAddrTable->dwNumEntries; i++) {
-        if (pIpAddrTable->table[i].wType == MIB_IPADDR_PRIMARY) {
-            wchar_t ipString[INET6_ADDRSTRLEN];
-            InetNtop(AF_INET, &pIpAddrTable->table[i].dwAddr, ipString, INET6_ADDRSTRLEN);
-            printf("LAN IP Address: %ws\n", ipString);
+            // Get ARP table and display directly connected devices
+            ULONG ulArpBufLen = 0;
+            GetIpNetTable(NULL, &ulArpBufLen, FALSE);
+            PMIB_IPNETTABLE pArpTable = (MIB_IPNETTABLE*)malloc(ulArpBufLen);
+            if (GetIpNetTable(pArpTable, &ulArpBufLen, FALSE) == NO_ERROR) {
+                for (DWORD i = 0; i < pArpTable->dwNumEntries; i++) {
+                    if (pArpTable->table[i].dwPhysAddrLen != 0 &&
+                        pArpTable->table[i].dwType == MIB_IPNET_TYPE_DYNAMIC) {
 
-            struct in_addr addr;
-            addr.S_un.S_addr = (u_long)pIpAddrTable->table[i].dwAddr;
-            addr.S_un.S_un_b.s_b4 = (addr.S_un.S_un_b.s_b4 & 0xFFFFFF00) | 1; // Start of range (e.g., 192.168.1.1)
+                        // Convert IP address to dotted-decimal format using InetNtop
+                        WCHAR ipString[INET6_ADDRSTRLEN]; // Use the maximum possible length
+                        InetNtop(AF_INET, &pArpTable->table[i].dwAddr, ipString, INET6_ADDRSTRLEN);
+                        // Convert wide character string to narrow character string for output
+                            char narrowIpString[INET6_ADDRSTRLEN];
+                        WideCharToMultiByte(CP_ACP, 0, ipString, -1, narrowIpString, INET6_ADDRSTRLEN, NULL, NULL);
+                        std::string ipStr(narrowIpString);
 
-            printf("Possible Peer IP Range:\n");
-            for (int j = 1; j < 255; j++) {
-                addr.S_un.S_un_b.s_b4++;
-                InetNtop(AF_INET, &addr, ipString, INET6_ADDRSTRLEN);
-                printf("  %ws\n", ipString);
+                        // Filter for LAN cable connected devices (169.254.x.x)
+                        if (ipStr.substr(0, 7) == "169.254") {
+                            std::cout << "   Directly Connected Device (LAN): " << ipStr << std::endl;
+                            break;
+                        }
+                    }
+                }
             }
-
-            break;
+            free(pArpTable);
+            pAdapter = pAdapter->Next;
         }
     }
 
-    // Clean up
-    free(pIpAddrTable);
+    free(pAdapterInfo);
+
+    // Cleanup Winsock
     WSACleanup();
+
     return 0;
 }
