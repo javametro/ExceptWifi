@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LANCableDetectIPAddress", "LANCableDetectIPAddress\LANCableDetectIPAddress.vcxproj", "{F979D9F9-5B19-45FA-A390-104E5134BF9E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileReceiver", "FileReceiver\FileReceiver.vcxproj", "{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileSender", "FileSender\FileSender.vcxproj", "{8C64CEEC-4D17-4439-9DA9-56370058E330}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +25,22 @@ Global
 		{F979D9F9-5B19-45FA-A390-104E5134BF9E}.Release|x64.Build.0 = Release|x64
 		{F979D9F9-5B19-45FA-A390-104E5134BF9E}.Release|x86.ActiveCfg = Release|Win32
 		{F979D9F9-5B19-45FA-A390-104E5134BF9E}.Release|x86.Build.0 = Release|Win32
+		{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}.Debug|x64.ActiveCfg = Debug|x64
+		{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}.Debug|x64.Build.0 = Debug|x64
+		{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}.Debug|x86.ActiveCfg = Debug|Win32
+		{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}.Debug|x86.Build.0 = Debug|Win32
+		{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}.Release|x64.ActiveCfg = Release|x64
+		{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}.Release|x64.Build.0 = Release|x64
+		{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}.Release|x86.ActiveCfg = Release|Win32
+		{94F96C3D-51C8-4FD8-9FFF-D2E415D0CE3D}.Release|x86.Build.0 = Release|Win32
+		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Debug|x64.ActiveCfg = Debug|x64
+		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Debug|x64.Build.0 = Debug|x64
+		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Debug|x86.Build.0 = Debug|Win32
+		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Release|x64.ActiveCfg = Release|x64
+		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Release|x64.Build.0 = Release|x64
+		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Release|x86.ActiveCfg = Release|Win32
+		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
