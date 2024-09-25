@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileReceiver", "FileReceive
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileSender", "FileSender\FileSender.vcxproj", "{8C64CEEC-4D17-4439-9DA9-56370058E330}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CaptureClientControl", "CaptureClientControl\CaptureClientControl.vcxproj", "{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Release|x64.Build.0 = Release|x64
 		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Release|x86.ActiveCfg = Release|Win32
 		{8C64CEEC-4D17-4439-9DA9-56370058E330}.Release|x86.Build.0 = Release|Win32
+		{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}.Debug|x64.ActiveCfg = Debug|x64
+		{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}.Debug|x64.Build.0 = Debug|x64
+		{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}.Debug|x86.ActiveCfg = Debug|Win32
+		{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}.Debug|x86.Build.0 = Debug|Win32
+		{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}.Release|x64.ActiveCfg = Release|x64
+		{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}.Release|x64.Build.0 = Release|x64
+		{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}.Release|x86.ActiveCfg = Release|Win32
+		{A6B777B3-10BC-437E-A9E8-BD4C5DAD7B66}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
